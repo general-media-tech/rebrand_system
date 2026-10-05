@@ -1,0 +1,134 @@
+/* gmt-shell.css — قشرةُ التطبيق للشاشة الرئيسية · الهوية ٢٫٠ (أبيض · حبر · أحمر العلامة)
+   الأحمر يملأ أربعةَ مواضع فقط: خطُّ الترويسة · الحالةُ النشِطة · الأيقونةُ الحاكمة · زرُّ الفعل.
+   طبقاتُ التراكب (من الأسفل): محتوى ⇐ شريطُ التنقّل ⇐ الورقة ⇐ نوافذُ الوحدات (z كبير، لا نمسّها). */
+:root{
+  --red:#D5001C; --dark:#0f1219; --card:#fff; --muted:#6b7280; --line:#e5e7eb;
+  --gx-z-nav:900; --gx-z-sheet:1000;
+  --gx-bar-h:52px;            /* ارتفاعُ شريط الكروم العلويّ (تحديث · إشعارات) */
+  --gx-tab-h:62px;
+}
+*{box-sizing:border-box}
+body.gx{margin:0;font-family:'Segoe UI',Tahoma,system-ui,sans-serif;background:var(--u-surface-2,#f7f8fa);color:var(--u-ink,#0f1219);min-height:100vh}
+body.gx.gx-lock{overflow:hidden}
+
+/* ── الهيكل ── */
+.gx-app{display:block;max-width:1480px;margin:0 auto}
+.gx-main{min-width:0;padding:14px 14px calc(var(--gx-tab-h) + 22px + env(safe-area-inset-bottom,0px))}
+.gx-side{display:none}
+
+/* ── ترويسة الصفحة (هويّة الفاتورة: اسمٌ ⇠ فاصل ⇠ وصف ⇠ خطٌّ أحمر) ── */
+.gx-head{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:14px;border-bottom:2px solid var(--red)}
+.gx-logo{width:38px;height:38px;border-radius:11px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;flex:0 0 auto}
+.gx-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.gx-head__n{font-size:18px;font-weight:900;letter-spacing:-.2px}
+.gx-head__sep{width:1px;height:16px;background:var(--line)}
+.gx-head__s{font-size:12px;font-weight:700;color:var(--muted)}
+.gx-head__sp{flex:1}
+.gx-iconbtn{width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:#fff;color:#334155;display:grid;place-items:center;cursor:pointer;padding:0}
+.gx-iconbtn:hover{border-color:var(--red);color:var(--red)}
+
+/* ── بحثٌ وأقسام ── */
+.gx-search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 12px;height:44px;margin:16px 0 4px}
+.gx-search:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(213,0,28,.1)}
+.gx-si{color:var(--muted);display:grid;place-items:center}
+.gx-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:14px;color:inherit;height:100%}
+.gx-sec{margin-top:22px;scroll-margin-top:calc(var(--gx-bar-h) + 10px)}
+.gx-h{display:flex;align-items:center;gap:7px;margin:0 0 10px;font-size:13.5px;font-weight:900}
+.gx-h::after{content:"";flex:1;height:1px;background:linear-gradient(to left,var(--red),transparent);opacity:.55}
+.gx-hi{color:var(--red);display:inline-grid;place-items:center}
+.gx-n{order:2;font-size:10.5px;font-weight:800;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:99px;padding:1px 7px}
+.gx-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.gx-empty{margin:26px 0;text-align:center;color:var(--muted);font-size:13px}
+
+/* ── بطاقةُ الأداة: مربّعُ أيقونةٍ ⇠ عنوانٌ سطرٌ واحد ⇠ وصفٌ خافت ⇠ سهمٌ في الطرف ── */
+.gx-tool,.gx-help{display:flex;align-items:center;gap:11px;min-height:64px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit;font:inherit;text-align:start;width:100%;cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s}
+.gx-tool:hover,.gx-help:hover{border-color:var(--red);box-shadow:0 8px 24px rgba(15,18,25,.08);transform:translateY(-1px)}
+.gx-tool:focus-visible,.gx-help:focus-visible,.gx-tab:focus-visible,.gx-nav__a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.gx-ic{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:var(--u-brand-soft,#fff1f2);color:var(--red);border:1px solid rgba(213,0,28,.14);display:grid;place-items:center}
+.gx-tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.gx-t{font-weight:800;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gx-d{font-size:11.5px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gx-aud{flex:0 0 auto;font-size:10px;font-weight:800;color:#64748b;background:#f1f5f9;border:1px solid var(--line);border-radius:99px;padding:2px 7px}
+.gx-chev{flex:0 0 auto;width:8px;height:8px;border-left:2px solid #cbd5e1;border-bottom:2px solid #cbd5e1;transform:rotate(45deg)}  /* سهمٌ يشير إلى اليسار = «خلفه شاشة» في الواجهة العربية */
+.gx-tool:hover .gx-chev{border-color:var(--red)}
+[hidden]{display:none!important}
+
+/* ── مُعدِّلاتُ أدوات المالك القديمة (صارت داخل طيّة) ── */
+.gx-owner{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.gx-owner>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px;font-weight:900;font-size:13.5px}
+.gx-owner>summary::-webkit-details-marker{display:none}
+.gx-owner>summary::after{content:"";margin-inline-start:auto;width:8px;height:8px;border-inline-start:2px solid #94a3b8;border-bottom:2px solid #94a3b8;transform:rotate(-45deg);transition:transform .18s}
+.gx-owner[open]>summary::after{transform:rotate(135deg)}
+.gx-owner>.gx-owner__b{padding:0 16px 16px}
+.section{margin-top:22px}
+.section h2{font-size:15px;font-weight:800;color:var(--red);margin:0 0 12px;padding-right:10px;border-right:4px solid var(--red)}
+.h2-ic{display:inline-grid;place-items:center;vertical-align:-2px;margin-left:6px;color:var(--red)}
+.gx footer{text-align:center;color:var(--muted);font-size:12px;margin:30px 0 6px}
+
+/* ── شريطُ التنقّل السفليّ (هاتف): شريطٌ بعرض الشاشة لا زرٌّ عائم — قاعدةُ المالك ── */
+.gx-tabs{position:fixed;inset-inline:0;bottom:0;z-index:var(--gx-z-nav);display:flex;height:calc(var(--gx-tab-h) + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:var(--u-glass,rgba(255,255,255,.88));backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-top:1px solid var(--line)}
+.gx-tab{flex:1;min-width:0;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:transparent;color:#64748b;text-decoration:none;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gx-tab__t{font-size:10.5px;font-weight:800}
+.gx-tab__i{display:grid;place-items:center;width:40px;height:26px;border-radius:99px}
+.gx-tab.is-on{color:var(--red)}
+.gx-tab.is-on .gx-tab__i{background:var(--u-brand-soft,#fff1f2)}
+.gx-tab.is-on::before{content:"";position:absolute;top:0;width:22px;height:3px;border-radius:0 0 3px 3px;background:var(--red)}
+
+/* ── ورقةُ «المزيد» ── */
+.gx-sheet{position:fixed;inset:0;z-index:var(--gx-z-sheet)}
+.gx-sheet__bg{position:absolute;inset:0;background:rgba(15,18,25,.5);opacity:0;transition:opacity .18s}
+.gx-sheet__p{position:absolute;inset-inline:0;bottom:0;max-height:92vh;display:flex;flex-direction:column;background:var(--u-surface-2,#f7f8fa);border-radius:22px 22px 0 0;box-shadow:var(--u-sh-lg,0 30px 80px rgba(15,18,25,.22));transform:translateY(100%);transition:transform .22s cubic-bezier(.2,.7,.2,1);padding:0 14px env(safe-area-inset-bottom,0px)}
+.gx-sheet.is-open .gx-sheet__bg{opacity:1}
+.gx-sheet.is-open .gx-sheet__p{transform:none}
+.gx-sheet__grab{width:38px;height:4px;border-radius:4px;background:#cbd5e1;margin:8px auto 4px}
+.gx-sheet__top{display:flex;align-items:center;justify-content:space-between;padding:6px 2px;font-size:15px}
+.gx-x{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:20px;line-height:1;cursor:pointer;color:#334155}
+.gx-sheet__body{overflow:auto;overscroll-behavior:contain;padding-bottom:20px}
+
+/* ── اللوح (≥700) ── */
+@media (min-width:700px){
+  .gx-grid{grid-template-columns:repeat(2,1fr)}
+  .gx-main{padding-inline:22px}
+  .gx-sheet__p{inset-inline:auto;left:50%;right:auto;width:min(720px,94vw);bottom:50%;max-height:84vh;border-radius:22px;transform:translate(-50%,50%) scale(.97);opacity:0;transition:transform .2s,opacity .2s}
+  .gx-sheet.is-open .gx-sheet__p{transform:translate(-50%,50%);opacity:1}
+  .gx-sheet__grab{display:none}
+}
+
+/* ── سطحُ المكتب (≥1024): شريطٌ جانبيّ أبيض زجاجيّ، والأحمرُ على العنصر النشِط وحده ── */
+@media (min-width:1024px){
+  .gx-app{display:grid;grid-template-columns:268px minmax(0,1fr);gap:0}
+  .gx-side{display:flex;flex-direction:column;gap:14px;position:sticky;top:var(--gx-bar-h);align-self:start;height:calc(100vh - var(--gx-bar-h));overflow:auto;padding:18px 14px;background:var(--u-glass,rgba(255,255,255,.8));border-inline-end:1px solid var(--line)}
+  .gx-side__brand{display:flex;align-items:center;gap:10px;padding:0 4px 12px;border-bottom:2px solid var(--red)}
+  .gx-side__brand b{font-size:15px;font-weight:900}
+  .gx-side__brand small{display:block;font-size:11px;font-weight:700;color:var(--muted)}
+  .gx-nav{display:flex;flex-direction:column;gap:2px}
+  .gx-nav__a{position:relative;display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:10px;color:#334155;text-decoration:none;font-size:13px;font-weight:800}
+  .gx-nav__a:hover{background:#f1f5f9}
+  .gx-nav__a.is-on{background:var(--u-brand-soft,#fff1f2);color:var(--red)}
+  .gx-nav__a.is-on::before{content:"";position:absolute;inset-inline-start:-14px;top:8px;bottom:8px;width:4px;border-radius:0 4px 4px 0;background:var(--red)}
+  .gx-nav__i{display:grid;place-items:center;color:inherit}
+  .gx-nav__t{flex:1}
+  .gx-side__sub{font-size:11px;font-weight:900;color:var(--muted);padding:0 6px;margin-top:4px}
+  .gx-side .gx-help{min-height:50px;padding:8px 10px;border-radius:11px;margin-bottom:6px}
+  .gx-side .gx-ic{width:32px;height:32px}
+  .gx-main{padding:20px 28px 40px}
+  .gx-tabs,.gx-head__more,.gx-head{display:none}
+  .gx-grid{grid-template-columns:repeat(auto-fill,minmax(236px,1fr))}
+  .gx-head .gx-logo,.gx-head .gx-head__n{display:none}
+  .gx-search{max-width:520px}
+}
+@media (min-width:1500px){ .gx-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))} }
+@media (prefers-reduced-motion:reduce){ .gx *{transition:none!important} }
+
+/* ── تراكبُ الوحدات الأخرى مع شريط التنقّل (قياسٌ لا تخمين) ──
+   شريطُ الفحص الذاتي gmt-sc-bar ثابتٌ عند bottom:0 بنمطٍ مضمَّن، فكان يغطّي
+   شريطَ التنقّل ويمنع الضغط عليه. نرفعه فوقه في الهاتف فقط. */
+@media (max-width:1023px){
+  body.gx #gmt-sc-bar{bottom:calc(var(--gx-tab-h) + env(safe-area-inset-bottom,0px))!important}
+  /* مؤشّرات اليوم والوصول السريع: عمودان لا صفٌّ لكل بطاقة — الشاشةُ تفتح بجواب لا بسلّمٍ من البطاقات */
+  #gmt-home .u-g--4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:480px){
+  .gx-head__s,.gx-head__sep{display:none}
+  .gx-head__n{font-size:16px;white-space:nowrap}
+}
